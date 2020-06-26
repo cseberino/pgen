@@ -26,8 +26,8 @@ stat_semicol  : semicol_base (SEMICOL semicol_base)* NEWLINE
 stat_if       : IF expression COLON NEWLINE block (ELIF expression COLON NEWLINE
                                               block)* [ELSE COLON NEWLINE block]
 
-stat_loop     : WHILE expression               COLON NEWLINE block
-              | FOR   expression IN expression COLON NEWLINE block
+stat_loop     : WHILE expression             COLON NEWLINE block
+              | FOR   VARIABLE IN expression COLON NEWLINE block
 
 stat_func     : DEF VARIABLE L_PAREN [VARIABLE (COMMA VARIABLE)*] R_PAREN COLON
                                                                    NEWLINE block
@@ -56,7 +56,7 @@ exp_prefix    : [PLUS | DASH | BIT_COMP] exp_pow
 
 exp_pow       : exp_inv_elems [STARSTAR exp_inv_elems]
 
-exp_inv_elems : exp_base L_PAREN [VARIABLE (COMMA VARIABLE)*] R_PAREN
+exp_inv_elems : exp_base L_PAREN [expression (COMMA expression)*] R_PAREN
               | exp_base (L_BRACK elements R_BRACK)+
               | exp_base
 
@@ -66,14 +66,12 @@ exp_base      : NONE
               | NATURAL
               | STRING
               | VARIABLE
-              | L_PAREN [expression (COMMA expression)*] R_PAREN
-              | L_PAREN [expression comprehen_for]       R_PAREN
               | L_BRACK [expression (COMMA expression)*] R_BRACK
               | L_BRACK [expression comprehen_for]       R_BRACK
+              | L_PAREN [expression (COMMA expression)*] R_PAREN
               | L_BRACE [key_val    (COMMA key_val)*]    R_BRACE
-              | L_BRACE [key_val    comprehen_for]       R_BRACE
 
-comprehen_for : FOR expression IN expression [comprehen_for | comprehen_if]
+comprehen_for : FOR VARIABLE IN expression [comprehen_for | comprehen_if]
 
 comprehen_if  : IF expression [comprehen_for | comprehen_if]
 

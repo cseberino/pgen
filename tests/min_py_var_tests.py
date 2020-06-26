@@ -173,11 +173,14 @@ while x:
                                                          min_py_var_grammar)
 
                 COLON     = ("COLON",   ":")
+                COMMA     = ("COMMA",   ",")
                 SEMICOL   = ("SEMICOL", ";")
+                EQUALS    = ("EQUALS",  "=")
                 L_PAREN   = ("L_PAREN", "(")
                 R_PAREN   = ("R_PAREN", ")")
                 L_BRACE   = ("L_BRACE", "{")
                 R_BRACE   = ("R_BRACE", "}")
+                VAR_I     = ("VARIABLE", "i")
                 VAR_X     = ("VARIABLE", "x")
                 VAR_Y     = ("VARIABLE", "y")
                 VAR_Z     = ("VARIABLE", "z")
@@ -245,6 +248,436 @@ while x:
                                         ("exp_inv_elems",
                                          ("exp_base",
                                           ("VARIABLE", "z")))))))))))))))
+                EXP_G     = ("expression",
+                             ("exp_log_and",
+                              ("exp_log_not",
+                               ("exp_comp",
+                                ("exp_bit_or",
+                                 ("exp_bit_xor",
+                                  ("exp_bit_and",
+                                   ("exp_shift",
+                                    ("exp_sum",
+                                     ("exp_prod",
+                                      ("exp_prefix",
+                                       ("exp_pow",
+                                        ("exp_inv_elems",
+                                         ("exp_base",
+                                          ("VARIABLE", "g")))))))))))))))
+                EXP_NONE  = ("expression",
+                             ("exp_log_and",
+                              ("exp_log_not",
+                               ("exp_comp",
+                                ("exp_bit_or",
+                                 ("exp_bit_xor",
+                                  ("exp_bit_and",
+                                   ("exp_shift",
+                                    ("exp_sum",
+                                     ("exp_prod",
+                                      ("exp_prefix",
+                                       ("exp_pow",
+                                        ("exp_inv_elems",
+                                         ("exp_base",
+                                          ("NONE", "None")))))))))))))))
+                EXP_TRUE  = ("expression",
+                             ("exp_log_and",
+                              ("exp_log_not",
+                               ("exp_comp",
+                                ("exp_bit_or",
+                                 ("exp_bit_xor",
+                                  ("exp_bit_and",
+                                   ("exp_shift",
+                                    ("exp_sum",
+                                     ("exp_prod",
+                                      ("exp_prefix",
+                                       ("exp_pow",
+                                        ("exp_inv_elems",
+                                         ("exp_base",
+                                          ("TRUE", "True")))))))))))))))
+                EXP_FALSE = ("expression",
+                             ("exp_log_and",
+                              ("exp_log_not",
+                               ("exp_comp",
+                                ("exp_bit_or",
+                                 ("exp_bit_xor",
+                                  ("exp_bit_and",
+                                   ("exp_shift",
+                                    ("exp_sum",
+                                     ("exp_prod",
+                                      ("exp_prefix",
+                                       ("exp_pow",
+                                        ("exp_inv_elems",
+                                         ("exp_base",
+                                          ("FALSE", "False")))))))))))))))
+                EXP_HELLO = ("expression",
+                             ("exp_log_and",
+                              ("exp_log_not",
+                               ("exp_comp",
+                                ("exp_bit_or",
+                                 ("exp_bit_xor",
+                                  ("exp_bit_and",
+                                   ("exp_shift",
+                                    ("exp_sum",
+                                     ("exp_prod",
+                                      ("exp_prefix",
+                                       ("exp_pow",
+                                        ("exp_inv_elems",
+                                         ("exp_base",
+                                          ("STRING", '"hello"')))))))))))))))
+                EXP_R7    = ("expression",
+                             ("exp_log_and",
+                              ("exp_log_not",
+                               ("exp_comp",
+                                ("exp_bit_or",
+                                 ("exp_bit_xor",
+                                  ("exp_bit_and",
+                                   ("exp_shift",
+                                    ("exp_sum",
+                                     ("exp_prod",
+                                      ("exp_prefix",
+                                       ("exp_pow",
+                                        ("exp_inv_elems",
+                                         ("exp_base", ("VARIABLE", "range")),
+                                         ("L_PAREN", "("),
+                                         EXP_7,
+                                         ("R_PAREN", ")"))))))))))))))
+                EXP_T7    = ("expression",
+                             ("exp_log_and",
+                              ("exp_log_not",
+                               ("exp_comp",
+                                ("exp_bit_or",
+                                 ("exp_bit_xor",
+                                  ("exp_bit_and",
+                                   ("exp_shift",
+                                    ("exp_sum",
+                                     ("exp_prod",
+                                      ("exp_prefix",
+                                       ("exp_pow",
+                                        ("exp_inv_elems",
+                                         ("exp_base",
+                                          ("L_PAREN", "("),
+                                          EXP_7,
+                                          ("R_PAREN", ")")))))))))))))))
+                EXP_L7    = ("expression",
+                             ("exp_log_and",
+                              ("exp_log_not",
+                               ("exp_comp",
+                                ("exp_bit_or",
+                                 ("exp_bit_xor",
+                                  ("exp_bit_and",
+                                   ("exp_shift",
+                                    ("exp_sum",
+                                     ("exp_prod",
+                                      ("exp_prefix",
+                                       ("exp_pow",
+                                        ("exp_inv_elems",
+                                         ("exp_base",
+                                          ("L_BRACK", "["),
+                                          EXP_7,
+                                          ("R_BRACK", "]")))))))))))))))
+                EXP_T7XY  = ("expression",
+                             ("exp_log_and",
+                              ("exp_log_not",
+                               ("exp_comp",
+                                ("exp_bit_or",
+                                 ("exp_bit_xor",
+                                  ("exp_bit_and",
+                                   ("exp_shift",
+                                    ("exp_sum",
+                                     ("exp_prod",
+                                      ("exp_prefix",
+                                       ("exp_pow",
+                                        ("exp_inv_elems",
+                                         ("exp_base",
+                                          ("L_PAREN", "("),
+                                          EXP_7,
+                                          COMMA,
+                                          EXP_X,
+                                          COMMA,
+                                          EXP_Y,
+                                          ("R_PAREN", ")")))))))))))))))
+                EXP_L7XY  = ("expression",
+                             ("exp_log_and",
+                              ("exp_log_not",
+                               ("exp_comp",
+                                ("exp_bit_or",
+                                 ("exp_bit_xor",
+                                  ("exp_bit_and",
+                                   ("exp_shift",
+                                    ("exp_sum",
+                                     ("exp_prod",
+                                      ("exp_prefix",
+                                       ("exp_pow",
+                                        ("exp_inv_elems",
+                                         ("exp_base",
+                                          ("L_BRACK", "["),
+                                          EXP_7,
+                                          COMMA,
+                                          EXP_X,
+                                          COMMA,
+                                          EXP_Y,
+                                          ("R_BRACK", "]")))))))))))))))
+                EXP_LC_S  = ("expression",
+                             ("exp_log_and",
+                              ("exp_log_not",
+                               ("exp_comp",
+                                ("exp_bit_or",
+                                 ("exp_bit_xor",
+                                  ("exp_bit_and",
+                                   ("exp_shift",
+                                    ("exp_sum",
+                                     ("exp_prod",
+                                      ("exp_prefix",
+                                       ("exp_pow",
+                                        ("exp_inv_elems",
+                                         ("exp_base",
+                                          ("L_BRACK", "["),
+                                          EXP_X,
+                                          ("comprehen_for",
+                                           ("FOR", "for"),
+                                           VAR_X,
+                                           ("IN", "in"),
+                                           EXP_R7),
+                                          ("R_BRACK", "]")))))))))))))))
+                EXP_LC_B  = ("expression",
+                             ("exp_log_and",
+                              ("exp_log_not",
+                               ("exp_comp",
+                                ("exp_bit_or",
+                                 ("exp_bit_xor",
+                                  ("exp_bit_and",
+                                   ("exp_shift",
+                                    ("exp_sum",
+                                     ("exp_prod",
+                                      ("exp_prefix",
+                                       ("exp_pow",
+                                        ("exp_inv_elems",
+                                         ("exp_base",
+                                          ("L_BRACK", "["),
+                                          EXP_T7XY,
+                                          ("comprehen_for",
+                                           ("FOR", "for"),
+                                           VAR_X,
+                                           ("IN", "in"),
+                                           EXP_R7,
+                                           ("comprehen_for",
+                                            ("FOR", "for"),
+                                            VAR_Y,
+                                            ("IN", "in"),
+                                            EXP_R7)),
+                                          ("R_BRACK", "]")))))))))))))))
+                EXP_LC_X = ("expression",
+                             ("exp_log_and",
+                              ("exp_log_not",
+                               ("exp_comp",
+                                ("exp_bit_or",
+                                 ("exp_bit_xor",
+                                  ("exp_bit_and",
+                                   ("exp_shift",
+                                    ("exp_sum",
+                                     ("exp_prod",
+                                      ("exp_prefix",
+                                       ("exp_pow",
+                                        ("exp_inv_elems",
+                                         ("exp_base",
+                                          ("L_BRACK", "["),
+                                          EXP_T7XY,
+                                          ("comprehen_for",
+                                           ("FOR", "for"),
+                                           VAR_X,
+                                           ("IN", "in"),
+                                           EXP_R7,
+                                           ("comprehen_if",
+                                            ("IF", "if"),
+                                            EXP_7,
+                                            ("comprehen_if",
+                                             ("IF", "if"),
+                                             EXP_X))),
+                                          ("R_BRACK", "]")))))))))))))))
+                EXP_DHEL7 = ("expression",
+                             ("exp_log_and",
+                              ("exp_log_not",
+                               ("exp_comp",
+                                ("exp_bit_or",
+                                 ("exp_bit_xor",
+                                  ("exp_bit_and",
+                                   ("exp_shift",
+                                    ("exp_sum",
+                                     ("exp_prod",
+                                      ("exp_prefix",
+                                       ("exp_pow",
+                                        ("exp_inv_elems",
+                                         ("exp_base",
+                                          ("L_BRACE", "{"),
+                                          ("key_val", EXP_HELLO, COLON, EXP_7),
+                                          ("R_BRACE", "}")))))))))))))))
+                EXP_DBIG  = ("expression",
+                             ("exp_log_and",
+                              ("exp_log_not",
+                               ("exp_comp",
+                                ("exp_bit_or",
+                                 ("exp_bit_xor",
+                                  ("exp_bit_and",
+                                   ("exp_shift",
+                                    ("exp_sum",
+                                     ("exp_prod",
+                                      ("exp_prefix",
+                                       ("exp_pow",
+                                        ("exp_inv_elems",
+                                         ("exp_base",
+                                          ("L_BRACE", "{"),
+                                          ("key_val", EXP_HELLO, COLON, EXP_7),
+                                          COMMA,
+                                          ("key_val", EXP_X    , COLON, EXP_7),
+                                          COMMA,
+                                          ("key_val", EXP_Y    , COLON, EXP_R7),
+                                          COMMA,
+                                          ("key_val", EXP_Z    , COLON, EXP_7),
+                                          ("R_BRACE", "}")))))))))))))))
+                EXP_FINV  = ("expression",
+                             ("exp_log_and",
+                              ("exp_log_not",
+                               ("exp_comp",
+                                ("exp_bit_or",
+                                 ("exp_bit_xor",
+                                  ("exp_bit_and",
+                                   ("exp_shift",
+                                    ("exp_sum",
+                                     ("exp_prod",
+                                      ("exp_prefix",
+                                       ("exp_pow",
+                                        ("exp_inv_elems",
+                                         ("exp_base", VAR_F),
+                                         ("L_PAREN", "("),
+                                         EXP_X,
+                                         COMMA,
+                                         EXP_Y,
+                                         COMMA,
+                                         EXP_Z,
+                                         ("R_PAREN", ")"))))))))))))))
+                EXP_ZIND  = ("expression",
+                             ("exp_log_and",
+                              ("exp_log_not",
+                               ("exp_comp",
+                                ("exp_bit_or",
+                                 ("exp_bit_xor",
+                                  ("exp_bit_and",
+                                   ("exp_shift",
+                                    ("exp_sum",
+                                     ("exp_prod",
+                                      ("exp_prefix",
+                                       ("exp_pow",
+                                        ("exp_inv_elems",
+                                         ("exp_base", VAR_Z),
+                                         ("L_BRACK", "["),
+                                         ("elements", EXP_7),
+                                         ("R_BRACK", "]"))))))))))))))
+                EXP_ZIND4 = ("expression",
+                             ("exp_log_and",
+                              ("exp_log_not",
+                               ("exp_comp",
+                                ("exp_bit_or",
+                                 ("exp_bit_xor",
+                                  ("exp_bit_and",
+                                   ("exp_shift",
+                                    ("exp_sum",
+                                     ("exp_prod",
+                                      ("exp_prefix",
+                                       ("exp_pow",
+                                        ("exp_inv_elems",
+                                         ("exp_base", VAR_Z),
+                                         ("L_BRACK", "["),
+                                         ("elements", EXP_7),
+                                         ("R_BRACK", "]"),
+                                         ("L_BRACK", "["),
+                                         ("elements", EXP_X),
+                                         ("R_BRACK", "]"),
+                                         ("L_BRACK", "["),
+                                         ("elements", EXP_Y),
+                                         ("R_BRACK", "]"),
+                                         ("L_BRACK", "["),
+                                         ("elements", EXP_Z),
+                                         ("R_BRACK", "]"))))))))))))))
+                EXP_ZSLS  = ("expression",
+                             ("exp_log_and",
+                              ("exp_log_not",
+                               ("exp_comp",
+                                ("exp_bit_or",
+                                 ("exp_bit_xor",
+                                  ("exp_bit_and",
+                                   ("exp_shift",
+                                    ("exp_sum",
+                                     ("exp_prod",
+                                      ("exp_prefix",
+                                       ("exp_pow",
+                                        ("exp_inv_elems",
+                                         ("exp_base", VAR_Z),
+                                         ("L_BRACK", "["),
+                                         ("elements", EXP_7, COLON, EXP_Y),
+                                         ("R_BRACK", "]"))))))))))))))
+                EXP_ZSLB  = ("expression",
+                             ("exp_log_and",
+                              ("exp_log_not",
+                               ("exp_comp",
+                                ("exp_bit_or",
+                                 ("exp_bit_xor",
+                                  ("exp_bit_and",
+                                   ("exp_shift",
+                                    ("exp_sum",
+                                     ("exp_prod",
+                                      ("exp_prefix",
+                                       ("exp_pow",
+                                        ("exp_inv_elems",
+                                         ("exp_base", VAR_Z),
+                                         ("L_BRACK", "["),
+                                         ("elements", EXP_7, COLON, EXP_Y,
+                                                                  COLON, EXP_Z),
+                                         ("R_BRACK", "]"))))))))))))))
+                EXP_7PX   = ("expression",
+                             ("exp_log_and",
+                              ("exp_log_not",
+                               ("exp_comp",
+                                ("exp_bit_or",
+                                 ("exp_bit_xor",
+                                  ("exp_bit_and",
+                                   ("exp_shift",
+                                    ("exp_sum",
+                                     ("exp_prod",
+                                      ("exp_prefix",
+                                       ("exp_pow",
+                                        ("exp_inv_elems",
+                                         ("exp_base", ("NATURAL", "7")))))),
+                                     ("PLUS", "+"),
+                                     ("exp_prod",
+                                      ("exp_prefix",
+                                       ("exp_pow",
+                                        ("exp_inv_elems",
+                                         ("exp_base", VAR_X))))))))))))))
+                EXP_7PXMY = ("expression",
+                             ("exp_log_and",
+                              ("exp_log_not",
+                               ("exp_comp",
+                                ("exp_bit_or",
+                                 ("exp_bit_xor",
+                                  ("exp_bit_and",
+                                   ("exp_shift",
+                                    ("exp_sum",
+                                     ("exp_prod",
+                                      ("exp_prefix",
+                                       ("exp_pow",
+                                        ("exp_inv_elems",
+                                         ("exp_base", ("NATURAL", "7")))))),
+                                     ("PLUS", "+"),
+                                     ("exp_prod",
+                                      ("exp_prefix",
+                                       ("exp_pow",
+                                        ("exp_inv_elems",
+                                         ("exp_base", VAR_X))))),
+                                     ("DASH", "-"),
+                                     ("exp_prod",
+                                      ("exp_prefix",
+                                       ("exp_pow",
+                                        ("exp_inv_elems",
+                                         ("exp_base", VAR_Y))))))))))))))
                 ST_PASS   = ("statement",
                              ("stat_semicol",
                               ("semicol_base", ("PASS", "pass")),
@@ -373,6 +806,343 @@ else:
                                COLON,
                                ("NEWLINE", "\n"),
                                ("block", B_BEG, ST_BREAK, B_END))))
+                self.assertEqual(output, answer)
+
+                output    = p("""
+range(7)
+""")
+                answer    = ("program",
+                             ("statement",
+                              ("stat_semicol",
+                               ("semicol_base", EXP_R7),
+                               ("NEWLINE", "\n"))))
+                self.assertEqual(output, answer)
+
+                output    = p("""
+def f():
+        pass
+""")
+                answer    = ("program",
+                             ("statement",
+                              ("stat_func",
+                               ("DEF", "def"),
+                               VAR_F,
+                               ("L_PAREN", "("),
+                               ("R_PAREN", ")"),
+                               COLON,
+                               ("NEWLINE", "\n"),
+                               ("block", B_BEG, ST_PASS, B_END))))
+                self.assertEqual(output, answer)
+
+                output    = p("""
+def f(x, y, z):
+        pass
+        break
+""")
+                answer    = ("program",
+                             ("statement",
+                              ("stat_func",
+                               ("DEF", "def"),
+                               VAR_F,
+                               ("L_PAREN", "("),
+                               VAR_X,
+                               COMMA,
+                               VAR_Y,
+                               COMMA,
+                               VAR_Z,
+                               ("R_PAREN", ")"),
+                               COLON,
+                               ("NEWLINE", "\n"),
+                               ("block", B_BEG, ST_PASS, ST_BREAK, B_END))))
+                self.assertEqual(output, answer)
+
+                output    = p("""
+for x in range(7):
+        pass
+        break
+""")
+                answer    = ("program",
+                             ("statement",
+                              ("stat_loop",
+                               ("FOR", "for"),
+                                VAR_X,
+                                ("IN", "in"),
+                                EXP_R7,
+                                COLON,
+                               ("NEWLINE", "\n"),
+                               ("block", B_BEG, ST_PASS, ST_BREAK, B_END))))
+                self.assertEqual(output, answer)
+
+                output    = p("""
+None
+True
+False
+"hello"
+""")
+                answer    = ("program",
+                             ("statement",
+                              ("stat_semicol",
+                               ("semicol_base", EXP_NONE),
+                               ("NEWLINE", "\n"))),
+                             ("statement",
+                              ("stat_semicol",
+                               ("semicol_base", EXP_TRUE),
+                               ("NEWLINE", "\n"))),
+                             ("statement",
+                              ("stat_semicol",
+                               ("semicol_base", EXP_FALSE),
+                               ("NEWLINE", "\n"))),
+                             ("statement",
+                              ("stat_semicol",
+                               ("semicol_base", EXP_HELLO),
+                               ("NEWLINE", "\n"))))
+                self.assertEqual(output, answer)
+
+                output    = p("""
+(7)
+""")
+                answer    = ("program",
+                             ("statement",
+                              ("stat_semicol",
+                               ("semicol_base", EXP_T7),
+                               ("NEWLINE", "\n"))))
+                self.assertEqual(output, answer)
+
+                output    = p("""
+(7, x, y)
+""")
+                answer    = ("program",
+                             ("statement",
+                              ("stat_semicol",
+                               ("semicol_base", EXP_T7XY),
+                               ("NEWLINE", "\n"))))
+                self.assertEqual(output, answer)
+
+                output    = p("""
+[x for x in range(7)]
+""")
+                answer    = ("program",
+                             ("statement",
+                              ("stat_semicol",
+                               ("semicol_base", EXP_LC_S),
+                               ("NEWLINE", "\n"))))
+                self.assertEqual(output, answer)
+
+                output    = p("""
+[7]
+""")
+                answer    = ("program",
+                             ("statement",
+                              ("stat_semicol",
+                               ("semicol_base", EXP_L7),
+                               ("NEWLINE", "\n"))))
+                self.assertEqual(output, answer)
+
+                output    = p("""
+[7, x, y]
+""")
+                answer    = ("program",
+                             ("statement",
+                              ("stat_semicol",
+                               ("semicol_base", EXP_L7XY),
+                               ("NEWLINE", "\n"))))
+                self.assertEqual(output, answer)
+
+                output    = p("""
+{"hello" : 7}
+""")
+                answer    = ("program",
+                             ("statement",
+                              ("stat_semicol",
+                               ("semicol_base", EXP_DHEL7),
+                               ("NEWLINE", "\n"))))
+                self.assertEqual(output, answer)
+
+                output    = p("""
+{"hello" : 7, x : 7, y : range(7), z : 7}
+""")
+                answer    = ("program",
+                             ("statement",
+                              ("stat_semicol",
+                               ("semicol_base", EXP_DBIG),
+                               ("NEWLINE", "\n"))))
+                self.assertEqual(output, answer)
+
+                output    = p("""
+x = 7
+""")
+                answer    = ("program",
+                             ("statement",
+                              ("stat_semicol",
+                               ("semicol_base",
+                                EXP_X, ("assign_op", EQUALS), EXP_7),
+                               ("NEWLINE", "\n"))))
+                self.assertEqual(output, answer)
+
+                output    = p("""
+return x
+""")
+                answer    = ("program",
+                             ("statement",
+                              ("stat_semicol",
+                               ("semicol_base",
+                                ("RETURN", "return"), EXP_X),
+                               ("NEWLINE", "\n"))))
+                self.assertEqual(output, answer)
+
+                output    = p("""
+[(7, x, y) for x in range(7) for y in range(7)]
+""")
+                answer    = ("program",
+                             ("statement",
+                              ("stat_semicol",
+                               ("semicol_base", EXP_LC_B),
+                               ("NEWLINE", "\n"))))
+                self.assertEqual(output, answer)
+
+                output    = p("""
+[(7, x, y) for x in range(7) if 7 if x]
+""")
+                answer    = ("program",
+                             ("statement",
+                              ("stat_semicol",
+                               ("semicol_base", EXP_LC_X),
+                               ("NEWLINE", "\n"))))
+                self.assertEqual(output, answer)
+
+                output    = p("""
+f(x, y, z)
+""")
+                answer    = ("program",
+                             ("statement",
+                              ("stat_semicol",
+                               ("semicol_base", EXP_FINV),
+                               ("NEWLINE", "\n"))))
+                self.assertEqual(output, answer)
+
+                output    = p("""
+z[7]
+""")
+                answer    = ("program",
+                             ("statement",
+                              ("stat_semicol",
+                               ("semicol_base", EXP_ZIND),
+                               ("NEWLINE", "\n"))))
+                self.assertEqual(output, answer)
+
+                output    = p("""
+z[7][x][y][z]
+""")
+                answer    = ("program",
+                             ("statement",
+                              ("stat_semicol",
+                               ("semicol_base", EXP_ZIND4),
+                               ("NEWLINE", "\n"))))
+                self.assertEqual(output, answer)
+
+                output    = p("""
+z[7:y]
+""")
+                answer    = ("program",
+                             ("statement",
+                              ("stat_semicol",
+                               ("semicol_base", EXP_ZSLS),
+                               ("NEWLINE", "\n"))))
+                self.assertEqual(output, answer)
+
+                output    = p("""
+z[7:y:z]
+""")
+                answer    = ("program",
+                             ("statement",
+                              ("stat_semicol",
+                               ("semicol_base", EXP_ZSLB),
+                               ("NEWLINE", "\n"))))
+                self.assertEqual(output, answer)
+
+                output    = p("""
+7 + x
+""")
+                answer    = ("program",
+                             ("statement",
+                              ("stat_semicol",
+                               ("semicol_base", EXP_7PX),
+                               ("NEWLINE", "\n"))))
+                self.assertEqual(output, answer)
+
+                output    = p("""
+7 + x - y
+""")
+                answer    = ("program",
+                             ("statement",
+                              ("stat_semicol",
+                               ("semicol_base", EXP_7PXMY),
+                               ("NEWLINE", "\n"))))
+                self.assertEqual(output, answer)
+
+                output    = p("""
+for i in range(7):
+        g += [(7, x, y) for x in range(7) if 7 if x]
+        y /= f(x, y, z)
+        while z[7:y:z]:
+                if z[7]:
+                        g = {"hello" : 7, x : 7, y : range(7), z : 7}
+                        y = 7 + x - y
+""")
+                answer    = ("program",
+                             ("statement",
+                              ("stat_loop",
+                               ("FOR", "for"), VAR_I, ("IN", "in"), EXP_R7,
+                                                       COLON, ("NEWLINE", "\n"),
+                               ("block",
+                                B_BEG,
+                                ("statement",
+                                 ("stat_semicol",
+                                  ("semicol_base",
+                                   EXP_G,
+                                   ("assign_op", ("ADD_EQ", "+=")),
+                                   EXP_LC_X),
+                                  ("NEWLINE", "\n"))),
+                                ("statement",
+                                 ("stat_semicol",
+                                  ("semicol_base",
+                                   EXP_Y,
+                                   ("assign_op", ("DIV_EQ", "/=")),
+                                   EXP_FINV),
+                                  ("NEWLINE", "\n"))),
+                                ("statement",
+                                 ("stat_loop",
+                                  ("WHILE", "while"),
+                                  EXP_ZSLB,
+                                  COLON,
+                                  ("NEWLINE", "\n"),
+                                  ("block",
+                                   B_BEG,
+                                   ("statement",
+                                    ("stat_if",
+                                     ("IF", "if"),
+                                     EXP_ZIND,
+                                     COLON,
+                                     ("NEWLINE", "\n"),
+                                     ("block",
+                                      B_BEG,
+                                      ("statement",
+                                       ("stat_semicol",
+                                        ("semicol_base",
+                                         EXP_G,
+                                         ("assign_op", EQUALS),
+                                         EXP_DBIG),
+                                        ("NEWLINE", "\n"))),
+                                      ("statement",
+                                       ("stat_semicol",
+                                        ("semicol_base",
+                                         EXP_Y,
+                                         ("assign_op", EQUALS),
+                                         EXP_7PXMY),
+                                        ("NEWLINE", "\n"))),
+                                      B_END))),
+                                   B_END))),
+                                B_END))))
                 self.assertEqual(output, answer)
 
 unittest.main()
