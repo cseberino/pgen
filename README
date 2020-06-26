@@ -1,0 +1,7 @@
+PGen
+
+a recursive descent parser generator
+
+Converts tokenizers and grammars into parsers.
+
+See the source code and other parsing resources for further details.
