@@ -21,9 +21,13 @@ sys.path.append("../..")
 import pgen.make_parser
 import pgen.add_prods
 import unittest
+import warnings
 import string
 
 class Tester(unittest.TestCase):
+        def setUp(self):
+                warnings.simplefilter("ignore", ResourceWarning)
+
         def test_find_group(self):
                 text   = "[abc(def)ghi]"
                 output = pgen.add_prods.find_group(text)
@@ -1310,5 +1314,4 @@ while 7:
                                ("block", B_BEG, STAT_PASS, B_END))))
                 self.assertEqual(output, answer)
 
-test_suite = unittest.makeSuite(Tester)
-unittest.TextTestRunner(verbosity = 2).run(test_suite)
+unittest.main()
