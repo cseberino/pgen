@@ -32,25 +32,25 @@ stat_loop     : WHILE expression             COLON NEWLINE block
 stat_func     : DEF VARIABLE L_PAREN [VARIABLE (COMMA VARIABLE)*] R_PAREN COLON
                                                                    NEWLINE block
 
-expression    : exp_log_and (LOG_OR  exp_log_and)*
+expression    : exp_log_and (LOG_OR              exp_log_and)*
 
-exp_log_and   : exp_log_not (LOG_AND exp_log_not)*
+exp_log_and   : exp_log_not (LOG_AND             exp_log_not)*
 
 exp_log_not   : [LOG_NOT]   exp_comp
 
-exp_comp      : exp_bit_or  (comp_op exp_bit_or)*
+exp_comp      : exp_bit_or  (comp_op             exp_bit_or)*
 
-exp_bit_or    : exp_bit_xor (BIT_OR                      exp_bit_xor)*
+exp_bit_or    : exp_bit_xor (BIT_OR              exp_bit_xor)*
 
-exp_bit_xor   : exp_bit_and (BIT_XOR                     exp_bit_and)*
+exp_bit_xor   : exp_bit_and (BIT_XOR             exp_bit_and)*
 
-exp_bit_and   : exp_shift   (BIT_AND                     exp_shift)*
+exp_bit_and   : exp_shift   (BIT_AND             exp_shift)*
 
-exp_shift     : exp_sum     ((L_SHIFT | R_SHIFT)         exp_sum)*
+exp_shift     : exp_sum     ((L_SHIFT | R_SHIFT) exp_sum)*
 
-exp_sum       : exp_prod    ((PLUS | DASH)               exp_prod)*
+exp_sum       : exp_prod    ((PLUS | DASH)       exp_prod)*
 
-exp_prod      : exp_prefix  ((STAR | DIV | MOD | DIVDIV) exp_prefix)*
+exp_prod      : exp_prefix  ((STAR | DIV | MOD)  exp_prefix)*
 
 exp_prefix    : [PLUS | DASH | BIT_COMP] exp_pow
 
@@ -79,17 +79,17 @@ elements      : [expression] COLON [expression] [COLON [expression]]
               | expression
 
 semicol_base  : PASS
-              | BREAK
               | CONTINUE
-              | expression [assign_op expression]
+              | BREAK
               | RETURN [expression]
+              | expression [assign_op expression]
 
 block         : BLOCK_BEG statement+ BLOCK_END
 
 key_val       : expression COLON expression
 
 assign_op     : EQUALS | ADD_EQ | SUB_EQ | MULT_EQ | DIV_EQ | MOD_EQ | L_SH_EQ
-                  | R_SH_EQ | B_AND_EQ | B_OR_EQ | B_XOR_EQ | EXP_EQ | DIVDIV_EQ
+                              | R_SH_EQ | B_AND_EQ | B_OR_EQ | B_XOR_EQ | EXP_EQ
 
 comp_op       : LS_THAN | LS_TH_EQ | GR_THAN | GR_TH_EQ | EQEQ | NOT_EQ | IN
                                                   | LOG_NOT IN | IS | IS LOG_NOT

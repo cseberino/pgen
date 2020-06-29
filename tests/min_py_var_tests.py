@@ -27,6 +27,7 @@ import string
 class Tester(unittest.TestCase):
         def setUp(self):
                 warnings.simplefilter("ignore", ResourceWarning)
+                warnings.simplefilter("ignore", DeprecationWarning)
 
         def test_min_py_var_tokenizer(self):
                 import min_py_var_tokenizer
@@ -46,8 +47,6 @@ class Tester(unittest.TestCase):
                           ("-",        "DASH"),
                           ("def",      "DEF"),
                           ("/",        "DIV"),
-                          ("//",       "DIVDIV"),
-                          ("//=",      "DIVDIV_EQ"),
                           ("/=",       "DIV_EQ"),
                           ("elif",     "ELIF"),
                           ("else",     "ELSE"),
