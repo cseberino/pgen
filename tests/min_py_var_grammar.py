@@ -52,7 +52,7 @@ exp_sum       : exp_prod      ((PLUS | DASH)       exp_prod)*
 
 exp_prod      : exp_prefix    ((STAR | DIV | MOD)  exp_prefix)*
 
-exp_prefix    : (PLUS | DASH | BIT_COMP)* exp_pow
+exp_prefix    : (PLUS | DASH | BIT_NOT)* exp_pow
 
 exp_pow       : exp_inv_elems (STARSTAR            exp_inv_elems)*
 

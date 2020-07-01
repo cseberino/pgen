@@ -37,7 +37,7 @@ class Tester(unittest.TestCase):
                           ("|=",       "B_OR_EQ"),
                           ("^=",       "B_XOR_EQ"),
                           ("&",        "BIT_AND"),
-                          ("~",        "BIT_COMP"),
+                          ("~",        "BIT_NOT"),
                           ("|",        "BIT_OR"),
                           ("^",        "BIT_XOR"),
                           ("break",    "BREAK"),
