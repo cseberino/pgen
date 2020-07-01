@@ -32,33 +32,32 @@ stat_loop     : WHILE expression             COLON NEWLINE block
 stat_func     : DEF VARIABLE L_PAREN [VARIABLE (COMMA VARIABLE)*] R_PAREN COLON
                                                                    NEWLINE block
 
-expression    : exp_log_and (LOG_OR              exp_log_and)*
+expression    : exp_log_and   (LOG_OR              exp_log_and)*
 
-exp_log_and   : exp_log_not (LOG_AND             exp_log_not)*
+exp_log_and   : exp_log_not   (LOG_AND             exp_log_not)*
 
-exp_log_not   : [LOG_NOT]   exp_comp
+exp_log_not   : LOG_NOT* exp_comp
 
-exp_comp      : exp_bit_or  (comp_op             exp_bit_or)*
+exp_comp      : exp_bit_or    (comp_op             exp_bit_or)*
 
-exp_bit_or    : exp_bit_xor (BIT_OR              exp_bit_xor)*
+exp_bit_or    : exp_bit_xor   (BIT_OR              exp_bit_xor)*
 
-exp_bit_xor   : exp_bit_and (BIT_XOR             exp_bit_and)*
+exp_bit_xor   : exp_bit_and   (BIT_XOR             exp_bit_and)*
 
-exp_bit_and   : exp_shift   (BIT_AND             exp_shift)*
+exp_bit_and   : exp_shift     (BIT_AND             exp_shift)*
 
-exp_shift     : exp_sum     ((L_SHIFT | R_SHIFT) exp_sum)*
+exp_shift     : exp_sum       ((L_SHIFT | R_SHIFT) exp_sum)*
 
-exp_sum       : exp_prod    ((PLUS | DASH)       exp_prod)*
+exp_sum       : exp_prod      ((PLUS | DASH)       exp_prod)*
 
-exp_prod      : exp_prefix  ((STAR | DIV | MOD)  exp_prefix)*
+exp_prod      : exp_prefix    ((STAR | DIV | MOD)  exp_prefix)*
 
-exp_prefix    : [PLUS | DASH | BIT_COMP] exp_pow
+exp_prefix    : (PLUS | DASH | BIT_COMP)* exp_pow
 
-exp_pow       : exp_inv_elems [STARSTAR exp_inv_elems]
+exp_pow       : exp_inv_elems (STARSTAR            exp_inv_elems)*
 
-exp_inv_elems : exp_base L_PAREN [expression (COMMA expression)*] R_PAREN
-              | exp_base (L_BRACK elements R_BRACK)+
-              | exp_base
+exp_inv_elems : exp_base (L_PAREN [expression (COMMA expression)*] R_PAREN |
+                                                      L_BRACK elements R_BRACK)*
 
 exp_base      : NONE
               | TRUE
