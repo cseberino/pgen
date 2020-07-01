@@ -677,6 +677,68 @@ while x:
                                        ("exp_pow",
                                         ("exp_inv_elems",
                                          ("exp_base", VAR_Y))))))))))))))
+                EXP_F2INV = ("expression",
+                             ("exp_log_and",
+                              ("exp_log_not",
+                               ("exp_comp",
+                                ("exp_bit_or",
+                                 ("exp_bit_xor",
+                                  ("exp_bit_and",
+                                   ("exp_shift",
+                                    ("exp_sum",
+                                     ("exp_prod",
+                                      ("exp_prefix",
+                                       ("exp_pow",
+                                        ("exp_inv_elems",
+                                         ("exp_base", VAR_F),
+                                         ("L_PAREN", "("),
+                                         EXP_X,
+                                         COMMA,
+                                         EXP_Y,
+                                         COMMA,
+                                         EXP_Z,
+                                         ("R_PAREN", ")"),
+                                         ("L_PAREN", "("),
+                                         EXP_X,
+                                         COMMA,
+                                         EXP_Y,
+                                         COMMA,
+                                         EXP_Z,
+                                         ("R_PAREN", ")"))))))))))))))
+                EXP_FLOTS = ("expression",
+                             ("exp_log_and",
+                              ("exp_log_not",
+                               ("exp_comp",
+                                ("exp_bit_or",
+                                 ("exp_bit_xor",
+                                  ("exp_bit_and",
+                                   ("exp_shift",
+                                    ("exp_sum",
+                                     ("exp_prod",
+                                      ("exp_prefix",
+                                       ("exp_pow",
+                                        ("exp_inv_elems",
+                                         ("exp_base", VAR_F),
+                                         ("L_PAREN", "("),
+                                         EXP_X,
+                                         COMMA,
+                                         EXP_Y,
+                                         COMMA,
+                                         EXP_Z,
+                                         ("R_PAREN", ")"),
+                                         ("L_BRACK", "["),
+                                         ("elements", EXP_7),
+                                         ("R_BRACK", "]"),
+                                         ("L_PAREN", "("),
+                                         EXP_X,
+                                         COMMA,
+                                         EXP_Y,
+                                         COMMA,
+                                         EXP_Z,
+                                         ("R_PAREN", ")"),
+                                         ("L_BRACK", "["),
+                                         ("elements", EXP_7),
+                                         ("R_BRACK", "]"))))))))))))))
                 ST_PASS   = ("statement",
                              ("stat_semicol",
                               ("semicol_base", ("PASS", "pass")),
@@ -1143,5 +1205,26 @@ for i in range(7):
                                    B_END))),
                                 B_END))))
                 self.assertEqual(output, answer)
+
+                output    = p("""
+f(x, y, z)(x, y, z)
+""")
+                answer    = ("program",
+                             ("statement",
+                              ("stat_semicol",
+                               ("semicol_base", EXP_F2INV),
+                               ("NEWLINE", "\n"))))
+                self.assertEqual(output, answer)
+
+                output    = p("""
+f(x, y, z)[7](x, y, z)[7]
+""")
+                answer    = ("program",
+                             ("statement",
+                              ("stat_semicol",
+                               ("semicol_base", EXP_FLOTS),
+                               ("NEWLINE", "\n"))))
+                self.assertEqual(output, answer)
+
 
 unittest.main()
