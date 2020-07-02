@@ -373,27 +373,6 @@ while x:
                                           ("L_BRACK", "["),
                                           EXP_7,
                                           ("R_BRACK", "]")))))))))))))))
-                EXP_T7XY  = ("expression",
-                             ("exp_log_and",
-                              ("exp_log_not",
-                               ("exp_comp",
-                                ("exp_bit_or",
-                                 ("exp_bit_xor",
-                                  ("exp_bit_and",
-                                   ("exp_shift",
-                                    ("exp_sum",
-                                     ("exp_prod",
-                                      ("exp_prefix",
-                                       ("exp_pow",
-                                        ("exp_inv_elems",
-                                         ("exp_base",
-                                          ("L_PAREN", "("),
-                                          EXP_7,
-                                          COMMA,
-                                          EXP_X,
-                                          COMMA,
-                                          EXP_Y,
-                                          ("R_PAREN", ")")))))))))))))))
                 EXP_L7XY  = ("expression",
                              ("exp_log_and",
                               ("exp_log_not",
@@ -452,7 +431,7 @@ while x:
                                         ("exp_inv_elems",
                                          ("exp_base",
                                           ("L_BRACK", "["),
-                                          EXP_T7XY,
+                                          EXP_L7XY,
                                           ("comprehen_for",
                                            ("FOR", "for"),
                                            VAR_X,
@@ -479,7 +458,7 @@ while x:
                                         ("exp_inv_elems",
                                          ("exp_base",
                                           ("L_BRACK", "["),
-                                          EXP_T7XY,
+                                          EXP_L7XY,
                                           ("comprehen_for",
                                            ("FOR", "for"),
                                            VAR_X,
@@ -970,16 +949,6 @@ False
                 self.assertEqual(output, answer)
 
                 output    = p("""
-(7, x, y)
-""")
-                answer    = ("program",
-                             ("statement",
-                              ("stat_semicol",
-                               ("semicol_base", EXP_T7XY),
-                               ("NEWLINE", "\n"))))
-                self.assertEqual(output, answer)
-
-                output    = p("""
 [x for x in range(7)]
 """)
                 answer    = ("program",
@@ -1052,7 +1021,7 @@ return x
                 self.assertEqual(output, answer)
 
                 output    = p("""
-[(7, x, y) for x in range(7) for y in range(7)]
+[[7, x, y] for x in range(7) for y in range(7)]
 """)
                 answer    = ("program",
                              ("statement",
@@ -1062,7 +1031,7 @@ return x
                 self.assertEqual(output, answer)
 
                 output    = p("""
-[(7, x, y) for x in range(7) if 7 if x]
+[[7, x, y] for x in range(7) if 7 if x]
 """)
                 answer    = ("program",
                              ("statement",
@@ -1143,7 +1112,7 @@ z[7:y:z]
 
                 output    = p("""
 for i in range(7):
-        g += [(7, x, y) for x in range(7) if 7 if x]
+        g += [[7, x, y] for x in range(7) if 7 if x]
         y /= f(x, y, z)
         while z[7:y:z]:
                 if z[7]:
@@ -1225,6 +1194,5 @@ f(x, y, z)[7](x, y, z)[7]
                                ("semicol_base", EXP_FLOTS),
                                ("NEWLINE", "\n"))))
                 self.assertEqual(output, answer)
-
 
 unittest.main()

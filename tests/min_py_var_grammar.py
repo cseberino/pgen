@@ -65,9 +65,9 @@ exp_base      : NONE
               | NATURAL
               | STRING
               | VARIABLE
+              | L_PAREN expression                       R_PAREN
               | L_BRACK [expression (COMMA expression)*] R_BRACK
               | L_BRACK [expression comprehen_for]       R_BRACK
-              | L_PAREN [expression (COMMA expression)*] R_PAREN
               | L_BRACE [key_val    (COMMA key_val)*]    R_BRACE
 
 comprehen_for : FOR VARIABLE IN expression [comprehen_for | comprehen_if]
