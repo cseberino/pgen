@@ -67,12 +67,7 @@ exp_base      : NONE
               | VARIABLE
               | L_PAREN expression                       R_PAREN
               | L_BRACK [expression (COMMA expression)*] R_BRACK
-              | L_BRACK [expression comprehen_for]       R_BRACK
               | L_BRACE [key_val    (COMMA key_val)*]    R_BRACE
-
-comprehen_for : FOR VARIABLE IN expression [comprehen_for | comprehen_if]
-
-comprehen_if  : IF expression [comprehen_for | comprehen_if]
 
 elements      : [expression] COLON [expression] [COLON [expression]]
               | expression

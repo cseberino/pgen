@@ -394,83 +394,6 @@ while x:
                                           COMMA,
                                           EXP_Y,
                                           ("R_BRACK", "]")))))))))))))))
-                EXP_LC_S  = ("expression",
-                             ("exp_log_and",
-                              ("exp_log_not",
-                               ("exp_comp",
-                                ("exp_bit_or",
-                                 ("exp_bit_xor",
-                                  ("exp_bit_and",
-                                   ("exp_shift",
-                                    ("exp_sum",
-                                     ("exp_prod",
-                                      ("exp_prefix",
-                                       ("exp_pow",
-                                        ("exp_inv_elems",
-                                         ("exp_base",
-                                          ("L_BRACK", "["),
-                                          EXP_X,
-                                          ("comprehen_for",
-                                           ("FOR", "for"),
-                                           VAR_X,
-                                           ("IN", "in"),
-                                           EXP_R7),
-                                          ("R_BRACK", "]")))))))))))))))
-                EXP_LC_B  = ("expression",
-                             ("exp_log_and",
-                              ("exp_log_not",
-                               ("exp_comp",
-                                ("exp_bit_or",
-                                 ("exp_bit_xor",
-                                  ("exp_bit_and",
-                                   ("exp_shift",
-                                    ("exp_sum",
-                                     ("exp_prod",
-                                      ("exp_prefix",
-                                       ("exp_pow",
-                                        ("exp_inv_elems",
-                                         ("exp_base",
-                                          ("L_BRACK", "["),
-                                          EXP_L7XY,
-                                          ("comprehen_for",
-                                           ("FOR", "for"),
-                                           VAR_X,
-                                           ("IN", "in"),
-                                           EXP_R7,
-                                           ("comprehen_for",
-                                            ("FOR", "for"),
-                                            VAR_Y,
-                                            ("IN", "in"),
-                                            EXP_R7)),
-                                          ("R_BRACK", "]")))))))))))))))
-                EXP_LC_X = ("expression",
-                             ("exp_log_and",
-                              ("exp_log_not",
-                               ("exp_comp",
-                                ("exp_bit_or",
-                                 ("exp_bit_xor",
-                                  ("exp_bit_and",
-                                   ("exp_shift",
-                                    ("exp_sum",
-                                     ("exp_prod",
-                                      ("exp_prefix",
-                                       ("exp_pow",
-                                        ("exp_inv_elems",
-                                         ("exp_base",
-                                          ("L_BRACK", "["),
-                                          EXP_L7XY,
-                                          ("comprehen_for",
-                                           ("FOR", "for"),
-                                           VAR_X,
-                                           ("IN", "in"),
-                                           EXP_R7,
-                                           ("comprehen_if",
-                                            ("IF", "if"),
-                                            EXP_7,
-                                            ("comprehen_if",
-                                             ("IF", "if"),
-                                             EXP_X))),
-                                          ("R_BRACK", "]")))))))))))))))
                 EXP_DHEL7 = ("expression",
                              ("exp_log_and",
                               ("exp_log_not",
@@ -949,16 +872,6 @@ False
                 self.assertEqual(output, answer)
 
                 output    = p("""
-[x for x in range(7)]
-""")
-                answer    = ("program",
-                             ("statement",
-                              ("stat_semicol",
-                               ("semicol_base", EXP_LC_S),
-                               ("NEWLINE", "\n"))))
-                self.assertEqual(output, answer)
-
-                output    = p("""
 [7]
 """)
                 answer    = ("program",
@@ -1017,26 +930,6 @@ return x
                               ("stat_semicol",
                                ("semicol_base",
                                 ("RETURN", "return"), EXP_X),
-                               ("NEWLINE", "\n"))))
-                self.assertEqual(output, answer)
-
-                output    = p("""
-[[7, x, y] for x in range(7) for y in range(7)]
-""")
-                answer    = ("program",
-                             ("statement",
-                              ("stat_semicol",
-                               ("semicol_base", EXP_LC_B),
-                               ("NEWLINE", "\n"))))
-                self.assertEqual(output, answer)
-
-                output    = p("""
-[[7, x, y] for x in range(7) if 7 if x]
-""")
-                answer    = ("program",
-                             ("statement",
-                              ("stat_semicol",
-                               ("semicol_base", EXP_LC_X),
                                ("NEWLINE", "\n"))))
                 self.assertEqual(output, answer)
 
@@ -1112,7 +1005,7 @@ z[7:y:z]
 
                 output    = p("""
 for i in range(7):
-        g += [[7, x, y] for x in range(7) if 7 if x]
+        g += x
         y /= f(x, y, z)
         while z[7:y:z]:
                 if z[7]:
@@ -1131,7 +1024,7 @@ for i in range(7):
                                   ("semicol_base",
                                    EXP_G,
                                    ("assign_op", ("ADD_EQ", "+=")),
-                                   EXP_LC_X),
+                                   EXP_X),
                                   ("NEWLINE", "\n"))),
                                 ("statement",
                                  ("stat_semicol",
