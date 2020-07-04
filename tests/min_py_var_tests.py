@@ -394,46 +394,6 @@ while x:
                                           COMMA,
                                           EXP_Y,
                                           ("R_BRACK", "]")))))))))))))))
-                EXP_DHEL7 = ("expression",
-                             ("exp_log_and",
-                              ("exp_log_not",
-                               ("exp_comp",
-                                ("exp_bit_or",
-                                 ("exp_bit_xor",
-                                  ("exp_bit_and",
-                                   ("exp_shift",
-                                    ("exp_sum",
-                                     ("exp_prod",
-                                      ("exp_prefix",
-                                       ("exp_pow",
-                                        ("exp_inv_elems",
-                                         ("exp_base",
-                                          ("L_BRACE", "{"),
-                                          ("key_val", EXP_HELLO, COLON, EXP_7),
-                                          ("R_BRACE", "}")))))))))))))))
-                EXP_DBIG  = ("expression",
-                             ("exp_log_and",
-                              ("exp_log_not",
-                               ("exp_comp",
-                                ("exp_bit_or",
-                                 ("exp_bit_xor",
-                                  ("exp_bit_and",
-                                   ("exp_shift",
-                                    ("exp_sum",
-                                     ("exp_prod",
-                                      ("exp_prefix",
-                                       ("exp_pow",
-                                        ("exp_inv_elems",
-                                         ("exp_base",
-                                          ("L_BRACE", "{"),
-                                          ("key_val", EXP_HELLO, COLON, EXP_7),
-                                          COMMA,
-                                          ("key_val", EXP_X    , COLON, EXP_7),
-                                          COMMA,
-                                          ("key_val", EXP_Y    , COLON, EXP_R7),
-                                          COMMA,
-                                          ("key_val", EXP_Z    , COLON, EXP_7),
-                                          ("R_BRACE", "}")))))))))))))))
                 EXP_FINV  = ("expression",
                              ("exp_log_and",
                               ("exp_log_not",
@@ -892,26 +852,6 @@ False
                 self.assertEqual(output, answer)
 
                 output    = p("""
-{"hello" : 7}
-""")
-                answer    = ("program",
-                             ("statement",
-                              ("stat_semicol",
-                               ("semicol_base", EXP_DHEL7),
-                               ("NEWLINE", "\n"))))
-                self.assertEqual(output, answer)
-
-                output    = p("""
-{"hello" : 7, x : 7, y : range(7), z : 7}
-""")
-                answer    = ("program",
-                             ("statement",
-                              ("stat_semicol",
-                               ("semicol_base", EXP_DBIG),
-                               ("NEWLINE", "\n"))))
-                self.assertEqual(output, answer)
-
-                output    = p("""
 x = 7
 """)
                 answer    = ("program",
@@ -1009,7 +949,7 @@ for i in range(7):
         y /= f(x, y, z)
         while z[7:y:z]:
                 if z[7]:
-                        g = {"hello" : 7, x : 7, y : range(7), z : 7}
+                        g = 7 + x - y
                         y = 7 + x - y
 """)
                 answer    = ("program",
@@ -1054,7 +994,7 @@ for i in range(7):
                                         ("semicol_base",
                                          EXP_G,
                                          ("assign_op", EQUALS),
-                                         EXP_DBIG),
+                                         EXP_7PXMY),
                                         ("NEWLINE", "\n"))),
                                       ("statement",
                                        ("stat_semicol",

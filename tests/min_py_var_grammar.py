@@ -67,7 +67,6 @@ exp_base      : NONE
               | VARIABLE
               | L_PAREN expression                       R_PAREN
               | L_BRACK [expression (COMMA expression)*] R_BRACK
-              | L_BRACE [key_val    (COMMA key_val)*]    R_BRACE
 
 elements      : [expression] COLON [expression] [COLON [expression]]
               | expression
@@ -79,8 +78,6 @@ semicol_base  : PASS
               | expression [assign_op expression]
 
 block         : BLOCK_BEG statement+ BLOCK_END
-
-key_val       : expression COLON expression
 
 assign_op     : EQUALS | ADD_EQ | SUB_EQ | MULT_EQ | DIV_EQ | MOD_EQ | L_SH_EQ
                               | R_SH_EQ | B_AND_EQ | B_OR_EQ | B_XOR_EQ | EXP_EQ
