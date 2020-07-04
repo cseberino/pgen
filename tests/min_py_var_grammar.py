@@ -71,8 +71,7 @@ exp_base      : NONE
 elements      : [expression] COLON [expression] [COLON [expression]]
               | expression
 
-semicol_base  : PASS
-              | CONTINUE
+semicol_base  : CONTINUE
               | BREAK
               | RETURN [expression]
               | expression [assign_op expression]

@@ -76,7 +76,6 @@ class Tester(unittest.TestCase):
                           ("562",      "NATURAL"),
                           ("None",     "NONE"),
                           ("!=",       "NOT_EQ"),
-                          ("pass",     "PASS"),
                           ("+",        "PLUS"),
                           ("}",        "R_BRACE"),
                           ("]",        "R_BRACK"),
@@ -97,14 +96,14 @@ class Tester(unittest.TestCase):
                           self.assertEqual(output, answer)
                 output = min_py_var_tokenizer.tokenizer("""
 if 3:
-     pass
+     8
 """)
                 answer = [("IF",        "if"),
                           ("NATURAL",   "3"),
                           ("COLON",     ":"),
                           ("NEWLINE",   "\n"),
                           ("BLOCK_BEG", ""),
-                          ("PASS",      "pass"),
+                          ("NATURAL",   "8"),
                           ("NEWLINE",   "\n"),
                           ("BLOCK_END", "")]
                 self.assertEqual(output, answer)
@@ -601,9 +600,9 @@ while x:
                                          ("L_BRACK", "["),
                                          ("elements", EXP_7),
                                          ("R_BRACK", "]"))))))))))))))
-                ST_PASS   = ("statement",
+                ST_7      = ("statement",
                              ("stat_semicol",
-                              ("semicol_base", ("PASS", "pass")),
+                              ("semicol_base", EXP_7),
                               ("NEWLINE", "\n")))
                 ST_BREAK  = ("statement",
                              ("stat_semicol",
@@ -611,13 +610,13 @@ while x:
                               ("NEWLINE", "\n")))
 
                 output    = p("""
-pass
+continue
 break
 """)
                 answer    = ("program",
                              ("statement",
                               ("stat_semicol",
-                               ("semicol_base", ("PASS", "pass")),
+                               ("semicol_base", ("CONTINUE", "continue")),
                                ("NEWLINE", "\n"))),
                              ("statement",
                               ("stat_semicol",
@@ -626,13 +625,11 @@ break
                 self.assertEqual(output, answer)
 
                 output    = p("""
-pass ; break ; continue
+break ; continue
 """)
                 answer    = ("program",
                              ("statement",
                               ("stat_semicol",
-                               ("semicol_base", ("PASS",     "pass")),
-                               SEMICOL,
                                ("semicol_base", ("BREAK",    "break")),
                                SEMICOL,
                                ("semicol_base", ("CONTINUE", "continue")),
@@ -651,7 +648,7 @@ pass ; break ; continue
 
                 output    = p("""
 while x:
-        pass
+        7
 """)
                 answer    = ("program",
                              ("statement",
@@ -660,12 +657,12 @@ while x:
                                EXP_X,
                                COLON,
                                ("NEWLINE", "\n"),
-                               ("block", B_BEG, ST_PASS, B_END))))
+                               ("block", B_BEG, ST_7, B_END))))
                 self.assertEqual(output, answer)
 
                 output    = p("""
 if x:
-        pass
+        7
 """)
                 answer    = ("program",
                              ("statement",
@@ -674,12 +671,12 @@ if x:
                                EXP_X,
                                COLON,
                                ("NEWLINE", "\n"),
-                               ("block", B_BEG, ST_PASS, B_END))))
+                               ("block", B_BEG, ST_7, B_END))))
                 self.assertEqual(output, answer)
 
                 output    = p("""
 if x:
-        pass
+        7
 else:
         break
 """)
@@ -690,7 +687,7 @@ else:
                                EXP_X,
                                COLON,
                                ("NEWLINE", "\n"),
-                               ("block", B_BEG, ST_PASS, B_END),
+                               ("block", B_BEG, ST_7, B_END),
                                ("ELSE", "else"),
                                COLON,
                                ("NEWLINE", "\n"),
@@ -699,9 +696,9 @@ else:
 
                 output    = p("""
 if   x:
-        pass
+        7
 elif y:
-        pass
+        7
 elif z:
         break
 else:
@@ -714,12 +711,12 @@ else:
                                EXP_X,
                                COLON,
                                ("NEWLINE", "\n"),
-                               ("block", B_BEG, ST_PASS, B_END),
+                               ("block", B_BEG, ST_7, B_END),
                                ("ELIF", "elif"),
                                EXP_Y,
                                COLON,
                                ("NEWLINE", "\n"),
-                               ("block", B_BEG, ST_PASS, B_END),
+                               ("block", B_BEG, ST_7, B_END),
                                ("ELIF", "elif"),
                                EXP_Z,
                                COLON,
@@ -743,7 +740,7 @@ range(7)
 
                 output    = p("""
 def f():
-        pass
+        7
 """)
                 answer    = ("program",
                              ("statement",
@@ -754,12 +751,12 @@ def f():
                                ("R_PAREN", ")"),
                                COLON,
                                ("NEWLINE", "\n"),
-                               ("block", B_BEG, ST_PASS, B_END))))
+                               ("block", B_BEG, ST_7, B_END))))
                 self.assertEqual(output, answer)
 
                 output    = p("""
 def f(x, y, z):
-        pass
+        7
         break
 """)
                 answer    = ("program",
@@ -776,12 +773,12 @@ def f(x, y, z):
                                ("R_PAREN", ")"),
                                COLON,
                                ("NEWLINE", "\n"),
-                               ("block", B_BEG, ST_PASS, ST_BREAK, B_END))))
+                               ("block", B_BEG, ST_7, ST_BREAK, B_END))))
                 self.assertEqual(output, answer)
 
                 output    = p("""
 for x in range(7):
-        pass
+        7
         break
 """)
                 answer    = ("program",
@@ -793,7 +790,7 @@ for x in range(7):
                                 EXP_R7,
                                 COLON,
                                ("NEWLINE", "\n"),
-                               ("block", B_BEG, ST_PASS, ST_BREAK, B_END))))
+                               ("block", B_BEG, ST_7, ST_BREAK, B_END))))
                 self.assertEqual(output, answer)
 
                 output    = p("""
