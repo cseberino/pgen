@@ -78,11 +78,11 @@ exp_base      : NONE
 elements      : [expression] COLON [expression] [COLON [expression]]
               | expression
 
-assign_op     : EQUALS | ADD_EQ | SUB_EQ | MULT_EQ | DIV_EQ | MOD_EQ | L_SH_EQ
-                              | R_SH_EQ | B_AND_EQ | B_OR_EQ | B_XOR_EQ | EXP_EQ
+assign_op     : EQUALS | ADD_EQ | SUB_EQ | MULT_EQ | DIV_EQ | EXP_EQ | MOD_EQ |
+                               L_SH_EQ | R_SH_EQ | B_AND_EQ | B_OR_EQ | B_XOR_EQ
 
-comp_op       : LS_THAN | LS_TH_EQ | GR_THAN | GR_TH_EQ | EQEQ | NOT_EQ | IN
-                                                  | LOG_NOT IN | IS | IS LOG_NOT
+comp_op       : LS_THAN | LS_TH_EQ | GR_THAN | GR_TH_EQ | EQEQ | NOT_EQ | IN |
+                                                    LOG_NOT IN | IS | IS LOG_NOT
 """
 prods = [e.split(":") for e in prods.split("\n\n")]
 prods = dict([(e[0].strip(), e[1].strip()) for e in prods])
