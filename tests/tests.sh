@@ -1,3 +1,5 @@
+#!/bin/sh
+
 ./add_prods_tests.py
 ./adds_tests.py
 ./arith_tests.py

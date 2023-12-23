@@ -20,12 +20,8 @@ sys.path.append("../..")
 
 import pgen.add_prods
 import unittest
-import warnings
 
 class Tester(unittest.TestCase):
-        def setUp(self):
-                warnings.simplefilter("ignore", ResourceWarning)
-
         def test_find_group(self):
                 text   = "[abc(def)ghi]"
                 output = pgen.add_prods.find_group(text)

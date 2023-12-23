@@ -21,14 +21,9 @@ sys.path.append("../..")
 import pgen.make_parser
 import pgen.add_prods
 import unittest
-import warnings
 import string
 
 class Tester(unittest.TestCase):
-        def setUp(self):
-                warnings.simplefilter("ignore", ResourceWarning)
-                warnings.simplefilter("ignore", DeprecationWarning)
-
         def test_min_py_var_tokenizer(self):
                 import min_py_var_tokenizer
 

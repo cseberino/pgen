@@ -20,12 +20,8 @@ sys.path.append("../..")
 
 import pgen.make_parser
 import unittest
-import warnings
 
 class Tester(unittest.TestCase):
-        def setUp(self):
-                warnings.simplefilter("ignore", ResourceWarning)
-
         def test_arith_grammar(self):
                 import arith_tokenizer
                 import arith_grammar

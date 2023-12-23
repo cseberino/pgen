@@ -20,12 +20,8 @@ sys.path.append("../..")
 
 import pgen.make_parser
 import unittest
-import warnings
 
 class Tester(unittest.TestCase):
-        def setUp(self):
-                warnings.simplefilter("ignore", ResourceWarning)
-
         def test_min_c_var_tokenizer(self):
                 import min_c_var_tokenizer
 

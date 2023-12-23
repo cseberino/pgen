@@ -20,13 +20,9 @@ sys.path.append("../..")
 
 import pgen.make_parser
 import unittest
-import warnings
 import string
 
 class Tester(unittest.TestCase):
-        def setUp(self):
-                warnings.simplefilter("ignore", ResourceWarning)
-
         def test_adds_grammar(self):
                 import adds_tokenizer
                 import adds_grammar
